@@ -1,18 +1,22 @@
+import sqlite3
+from Class.Usuario import Usuario
+
 class Cliente:
 
-  def __init__(self, nombre='', apellido='', correo='', edad='', id_cliente=''):
+  def __init__(self, nombre, apellido, correo, edad, nombre_usuario, contraseña):
     self.__nombre = nombre
     self.__apellido = apellido
     self.__correo = correo
     self.__edad = edad
-    self.__id_cliente = id_cliente
+    self.__admin = False
+    self.__nombre_usuario = nombre_usuario
+    self.__contraseña = contraseña
 
   def __str__(self):
     cadena= "\nNombre: "+self.__nombre
     cadena+= "\nApellido: "+self.__apellido
     cadena+= "\nCorreo: "+(self.__correo)
     cadena+= "\nEdad: "+str(self.__edad)
-    cadena+= "\nID_cliente: "+str(self.__id_cliente)
     return cadena
 
   @property 
@@ -46,49 +50,17 @@ class Cliente:
   def set_edad(self, nuevaEdad):
     self.__edad=nuevaEdad
     return self.__edad
-
-  @property 
-  def get_id_cliente(self):
-    return self.__id_cliente
-
-  def set_id_cliente(self, nuevo_id_cliente):
-    self.__id_cliente=nuevo_id_cliente
-    return self.__id_cliente
-
-  def registro_usuario(self):
-
-    self.__nombre = self.get_nombre()
-    self.__apellido = self.get_apellido()
-    self.__correo = self.get_correo()
-    self.__edad = self.get_edad()
-    self.__id_cliente = self.get_id_cliente()
-
-    # conexión
-    if self.__nombre != '' and self.__apellido != '' and self.__correo != '' and self.__edad != '' and self.__id_cliente != '' :
-        pass
-    # esta correcto
-    else:
-        messagebox.showerror(title = 'ERROR', message = 'Para continuar, complete todos los datos solicitados')
-        return
-
-    db = sqlite3.connect('Cinemar.db')
+  
+  def registroUsuario(self):
+    nombre = self.__nombre 
+    apellido = self.__apellido
+    edad = self.__edad
+    correo = self.__correo
+    nombreUsuario = self.__nombre_usuario
+    contraseña = self.__contraseña
+    db = sqlite3.connect("cinemar.sqlite3")
     conexion = db.cursor()
-
-    # verificación 
-    conexion.execute('SELECT * FROM cliente WHERE cliente = ?', [])
-
-    if conexion.fetchone():
-        messagebox.showerror(title = 'ERROR', message = 'El usuario ingresado ya existe. Intente nuevamente.')
-    else:
-        conexion.execute('INSERT INTO cliente VALUES(NULL,?,?,?,?,?,?,5)',(nombre, apellido, correo, edad, idCliente))
-        db.commit()
-        self.set_nombre('')
-        self.set_apellido('')
-        self.set_correo('')
-        self.set_edad('')
-        self.set_id_cliente('')
-
-
-    # Conexión cerrada
-    conexion.close()
+    conexion.execute(f"INSERT INTO usuario (nombre_usuario, contraseña, correo, admin, nombre, apellido, edad ) VALUES('{nombreUsuario}', '{contraseña}', '{correo}', {self.__admin}, '{nombre}', '{apellido}', {edad})")
+    db.commit()
     db.close()
+    

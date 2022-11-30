@@ -1,19 +1,22 @@
+import sqlite3
+
 class Sala :
-    def __init__(self,id, pelicula, butacas ):
+    def __init__(self, id, cantidadDeButacas ):
         self.__id = id
-        self.__pelicula = pelicula
-        self.__butacas = (butacas)
-    @property
-    def getPelicula(self):
-        return self.pelicula
-    @property
-    def getButacas(self):
-        return self.__butacas
-    @property
+        self.__butacas = cantidadDeButacas
+        
     def getId(self):
+        print("ENTRE FUNCION")
         return self.__id
+    
     def mostrarDatos(self):
         cadena= "\nNumero de sala: "+ str(self.__id)
-        cadena+= "\nPelicula en sala: "+self.__pelicula.mostrarDatos()
-        cadena+= "\nCantidad de butacas: "+str(len(self.__butacas))
         return cadena
+        
+    
+    def crearSalaBDD(self):
+        db = sqlite3.connect("cinemar.sqlite3")
+        conexion = db.cursor()
+        conexion.execute(f"INSERT INTO sala (id_sala, cantidad_butacas) VALUES ({self.__id}, {self.__butacas})")
+        db.commit()
+        db.close()

@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.font as tkFont
+from Class.Usuario import Usuario
 
 class App:
     def __init__(self, root):
@@ -14,29 +15,29 @@ class App:
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
 
-        GLineEdit_387=tk.Entry(root)
-        GLineEdit_387["anchor"] = "center"
-        GLineEdit_387["bg"] = "#ffffff"
-        GLineEdit_387["borderwidth"] = "1px"
-        GLineEdit_387["cursor"] = "arrow"
+        self.__GLineEdit_387=tk.Entry(root)
+        # self.__GLineEdit_387["anchor"] = "center"
+        self.__GLineEdit_387["bg"] = "#ffffff"
+        self.__GLineEdit_387["borderwidth"] = "1px"
+        self.__GLineEdit_387["cursor"] = "arrow"
         ft = tkFont.Font(family='Times',size=10)
-        GLineEdit_387["font"] = ft
-        GLineEdit_387["fg"] = "#333333"
-        GLineEdit_387["justify"] = "center"
-        GLineEdit_387["text"] = "Usuario"
-        GLineEdit_387.place(x=220,y=110,width=178,height=30)
-        GLineEdit_387["show"] = "Usuario"
+        self.__GLineEdit_387["font"] = ft
+        self.__GLineEdit_387["fg"] = "#333333"
+        self.__GLineEdit_387["justify"] = "center"
+        self.__GLineEdit_387["text"] = "Usuario"
+        self.__GLineEdit_387.place(x=220,y=110,width=178,height=30)
+        self.__GLineEdit_387["show"] = "Usuario"
 
-        GLineEdit_833=tk.Entry(root)
-        GLineEdit_833["bg"] = "#ffffff"
-        GLineEdit_833["borderwidth"] = "1px"
+        self.__GLineEdit_833=tk.Entry(root)
+        self.__GLineEdit_833["bg"] = "#ffffff"
+        self.__GLineEdit_833["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
-        GLineEdit_833["font"] = ft
-        GLineEdit_833["fg"] = "#333333"
-        GLineEdit_833["justify"] = "center"
-        GLineEdit_833["text"] = "Contraseña"
-        GLineEdit_833["relief"] = "raised"
-        GLineEdit_833.place(x=220,y=170,width=178,height=30)
+        self.__GLineEdit_833["font"] = ft
+        self.__GLineEdit_833["fg"] = "#333333"
+        self.__GLineEdit_833["justify"] = "center"
+        self.__GLineEdit_833["text"] = "Contraseña"
+        self.__GLineEdit_833["relief"] = "raised"
+        self.__GLineEdit_833.place(x=220,y=170,width=178,height=30)
 
         GButton_932=tk.Button(root)
         GButton_932["bg"] = "#88817f"
@@ -69,7 +70,12 @@ class App:
         GLabel_622.place(x=210,y=60,width=185,height=30)
 
     def GButton_932_command(self):
-        print("command")
+        nombre_usuario =  self.__GLineEdit_387.get()
+        contraseña = self.__GLineEdit_833.get()
+        usuario = Usuario(nombre_usuario, contraseña)
+        usuario.login()
+        
+        
 
 
     def GButton_797_command(self):
