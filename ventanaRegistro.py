@@ -1,140 +1,300 @@
-import tkinter as tk
-import tkinter.font as tkFont
-from Class.Cliente import Cliente
 
-class App:
-    def __init__(self, root):
-        #setting title
-        root.title("Registro")
-        #setting window size
-        width=600
-        height=500
-        screenwidth = root.winfo_screenwidth()
-        screenheight = root.winfo_screenheight()
-        alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
-        root.geometry(alignstr)
-        root.resizable(width=False, height=False)
-
-        self.__GLineEdit_387=tk.Entry(root)
-        # self.__# GLineEdit_387["anchor"] = "center"
-        self.__GLineEdit_387["bg"] = "#ffffff"
-        self.__GLineEdit_387["borderwidth"] = "1px"
-        self.__GLineEdit_387["cursor"] = "arrow"
-        ft = tkFont.Font(family='Times',size=10)
-        self.__GLineEdit_387["font"] = ft
-        self.__GLineEdit_387["fg"] = "#333333"
-        self.__GLineEdit_387["justify"] = "center"
-        self.__GLineEdit_387["text"] = "Nombre"
-        self.__GLineEdit_387.place(x=90,y=110,width=178,height=30)
-        self.__GLineEdit_387["show"] = "Usuario"
-
-        self.__GLineEdit_833=tk.Entry(root)
-        self.__GLineEdit_833["bg"] = "#ffffff"
-        self.__GLineEdit_833["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times',size=10)
-        self.__GLineEdit_833["font"] = ft
-        self.__GLineEdit_833["fg"] = "#333333"
-        self.__GLineEdit_833["justify"] = "center"
-        self.__GLineEdit_833["text"] = "Apellido"
-        self.__GLineEdit_833["relief"] = "raised"
-        self.__GLineEdit_833.place(x=290,y=110,width=178,height=30)
-
-        self.__GButton_932=tk.Button(root)
-        self.__GButton_932["bg"] = "#88817f"
-        ft = tkFont.Font(family='Times',size=10)
-        self.__GButton_932["font"] = ft
-        self.__GButton_932["fg"] = "#ffffff"
-        self.__GButton_932["justify"] = "center"
-        self.__GButton_932["text"] = "REGISTRARSE"
-        self.__GButton_932["relief"] = "sunken"
-        self.__GButton_932.place(x=190,y=370,width=179,height=30)
-        self.__GButton_932["command"] = self.GButton_932_command
-
-        self.__GLabel_622=tk.Label(root)
-        ft = tkFont.Font(family='Times',size=10)
-        self.__GLabel_622["font"] = ft
-        self.__GLabel_622["fg"] = "#333333"
-        self.__GLabel_622["justify"] = "center"
-        self.__GLabel_622["text"] = "REGISTRATE COMO USUARIO DE CINEMAR"
-        self.__GLabel_622.place(x=60,y=60,width=291,height=30)
-
-        self.__GLineEdit_312=tk.Entry(root)
-        self.__GLineEdit_312["bg"] = "#ffffff"
-        self.__GLineEdit_312["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times',size=10)
-        self.__GLineEdit_312["font"] = ft
-        self.__GLineEdit_312["fg"] = "#333333"
-        self.__GLineEdit_312["justify"] = "center"
-        self.__GLineEdit_312["text"] = "Edad"
-        self.__GLineEdit_312.place(x=90,y=160,width=178,height=30)
-
-        self.__GLineEdit_945=tk.Entry(root)
-        self.__GLineEdit_945["bg"] = "#ffffff"
-        self.__GLineEdit_945["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times',size=10)
-        self.__GLineEdit_945["font"] = ft
-        self.__GLineEdit_945["fg"] = "#333333"
-        self.__GLineEdit_945["justify"] = "center"
-        self.__GLineEdit_945["text"] = "Correo Electrónico"
-        self.__GLineEdit_945.place(x=290,y=160,width=178,height=30)
-
-        self.__GLineEdit_344=tk.Entry(root)
-        self.__GLineEdit_344["bg"] = "#ffffff"
-        self.__GLineEdit_344["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times',size=10)
-        self.__GLineEdit_344["font"] = ft
-        self.__GLineEdit_344["fg"] = "#000000"
-        self.__GLineEdit_344["justify"] = "center"
-        self.__GLineEdit_344["text"] = "Usuario"
-        self.__GLineEdit_344.place(x=90,y=210,width=378,height=30)
-
-        self.__GLineEdit_609=tk.Entry(root)
-        self.__GLineEdit_609["bg"] = "#ffffff"
-        self.__GLineEdit_609["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times',size=10)
-        self.__GLineEdit_609["font"] = ft
-        self.__GLineEdit_609["fg"] = "#333333"
-        self.__GLineEdit_609["justify"] = "center"
-        self.__GLineEdit_609["text"] = "Contraseña"
-        self.__GLineEdit_609.place(x=90,y=260,width=180,height=30)
-
-        self.__GLineEdit_693=tk.Entry(root)
-        self.__GLineEdit_693["bg"] = "#ffffff"
-        self.__GLineEdit_693["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times',size=10)
-        self.__GLineEdit_693["font"] = ft
-        self.__GLineEdit_693["fg"] = "#333333"
-        self.__GLineEdit_693["justify"] = "center"
-        self.__GLineEdit_693["text"] = "Confirmar Contraseña"
-        self.__GLineEdit_693.place(x=290,y=260,width=175,height=30)
-
-        GCheckBox_643=tk.Checkbutton(root)
-        ft = tkFont.Font(family='Times',size=10)
-        GCheckBox_643["font"] = ft
-        GCheckBox_643["fg"] = "#333333"
-        GCheckBox_643["justify"] = "center"
-        GCheckBox_643["text"] = "Quiero recibir novedades y promociones de Cinemar en mi correo"
-        GCheckBox_643.place(x=100,y=320,width=372,height=30)
-        GCheckBox_643["offvalue"] = "0"
-        GCheckBox_643["onvalue"] = "1"
-        GCheckBox_643["command"] = self.GCheckBox_643_command
-
-    def GButton_932_command(self):
-        nombre = self.__GLineEdit_387.get()
-        apellido = self.__GLineEdit_833.get()
-        edad = self.__GLineEdit_312.get()
-        correo = self.__GLineEdit_945.get()
-        nombreUsuario = self.__GLineEdit_344.get()
-        contraseña = self.__GLineEdit_609.get()
-        
-        cliente = Cliente(nombre, apellido, correo, edad, nombreUsuario, contraseña)
-        cliente.registroUsuario()
+# This file was generated by the Tkinter Designer by Parth Jadhav
+# https://github.com/ParthJadhav/Tkinter-Designer
 
 
-    def GCheckBox_643_command(self):
-        print("command")
+from pathlib import Path
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = App(root)
-    root.mainloop()
+# from tkinter import *
+# Explicit imports to satisfy Flake8
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+
+
+OUTPUT_PATH = Path(__file__).parent
+ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\alcas\Documents\Cinemar\build\assets\frame1")
+
+
+def relative_to_assets(path: str) -> Path:
+    return ASSETS_PATH / Path(path)
+
+
+window = Tk()
+
+window.geometry("1280x832")
+window.configure(bg = "#FFFFFF")
+
+
+canvas = Canvas(
+    window,
+    bg = "#FFFFFF",
+    height = 832,
+    width = 1280,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
+)
+
+canvas.place(x = 0, y = 0)
+canvas.create_rectangle(
+    0.0,
+    0.0,
+    571.0,
+    832.0,
+    fill="#1B2D50",
+    outline="")
+
+canvas.create_text(
+    81.0,
+    238.0,
+    anchor="nw",
+    text="CREÁ TU CUENTA EN ",
+    fill="#FFFFFF",
+    font=("Inter", 30 * -1)
+)
+
+canvas.create_text(
+    81.0,
+    372.0,
+    anchor="nw",
+    text="CINEMAR",
+    fill="#FFFFFF",
+    font=("AllertaStencil Regular", 95 * -1)
+)
+
+canvas.create_text(
+    645.0,
+    94.0,
+    anchor="nw",
+    text="NOMBRE",
+    fill="#000000",
+    font=("Inter Bold", 20 * -1)
+)
+
+entry_image_1 = PhotoImage(
+    file=relative_to_assets("entry_1.png"))
+entry_bg_1 = canvas.create_image(
+    775.0,
+    169.0,
+    image=entry_image_1
+)
+entry_1 = Entry(
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_1.place(
+    x=640.0,
+    y=144.0,
+    width=270.0,
+    height=48.0
+)
+
+canvas.create_text(
+    947.0,
+    94.0,
+    anchor="nw",
+    text="APELLIDO",
+    fill="#000000",
+    font=("Inter Bold", 20 * -1)
+)
+
+entry_image_2 = PhotoImage(
+    file=relative_to_assets("entry_2.png"))
+entry_bg_2 = canvas.create_image(
+    1077.0,
+    169.0,
+    image=entry_image_2
+)
+entry_2 = Entry(
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_2.place(
+    x=942.0,
+    y=144.0,
+    width=270.0,
+    height=48.0
+)
+
+canvas.create_text(
+    645.0,
+    220.0,
+    anchor="nw",
+    text="EDAD",
+    fill="#000000",
+    font=("Inter Bold", 20 * -1)
+)
+
+entry_image_3 = PhotoImage(
+    file=relative_to_assets("entry_3.png"))
+entry_bg_3 = canvas.create_image(
+    775.0,
+    295.0,
+    image=entry_image_3
+)
+entry_3 = Entry(
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_3.place(
+    x=640.0,
+    y=270.0,
+    width=270.0,
+    height=48.0
+)
+
+canvas.create_text(
+    947.0,
+    220.0,
+    anchor="nw",
+    text="CORREO",
+    fill="#000000",
+    font=("Inter Bold", 20 * -1)
+)
+
+entry_image_4 = PhotoImage(
+    file=relative_to_assets("entry_4.png"))
+entry_bg_4 = canvas.create_image(
+    1077.0,
+    295.0,
+    image=entry_image_4
+)
+entry_4 = Entry(
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_4.place(
+    x=942.0,
+    y=270.0,
+    width=270.0,
+    height=48.0
+)
+
+canvas.create_text(
+    645.0,
+    350.0,
+    anchor="nw",
+    text="USUARIO",
+    fill="#000000",
+    font=("Inter Bold", 20 * -1)
+)
+
+entry_image_5 = PhotoImage(
+    file=relative_to_assets("entry_5.png"))
+entry_bg_5 = canvas.create_image(
+    926.0,
+    420.0,
+    image=entry_image_5
+)
+entry_5 = Entry(
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_5.place(
+    x=640.0,
+    y=395.0,
+    width=572.0,
+    height=48.0
+)
+
+canvas.create_text(
+    645.0,
+    482.0,
+    anchor="nw",
+    text="CONTRASEÑA",
+    fill="#000000",
+    font=("Inter Bold", 20 * -1)
+)
+
+entry_image_6 = PhotoImage(
+    file=relative_to_assets("entry_6.png"))
+entry_bg_6 = canvas.create_image(
+    775.0,
+    557.0,
+    image=entry_image_6
+)
+entry_6 = Entry(
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_6.place(
+    x=640.0,
+    y=532.0,
+    width=270.0,
+    height=48.0
+)
+
+canvas.create_text(
+    947.0,
+    482.0,
+    anchor="nw",
+    text="CONFIRMAR CONTRASEÑA",
+    fill="#000000",
+    font=("Inter Bold", 20 * -1)
+)
+
+entry_image_7 = PhotoImage(
+    file=relative_to_assets("entry_7.png"))
+entry_bg_7 = canvas.create_image(
+    1077.0,
+    557.0,
+    image=entry_image_7
+)
+entry_7 = Entry(
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_7.place(
+    x=942.0,
+    y=532.0,
+    width=270.0,
+    height=48.0
+)
+
+canvas.create_text(
+    673.0,
+    627.0,
+    anchor="nw",
+    text="Quiero recibir novedades y promociones de Cinemar en mi correo.",
+    fill="#000000",
+    font=("Inter Bold", 17 * -1)
+)
+
+canvas.create_rectangle(
+    640.0,
+    627.0,
+    665.0,
+    652.0,
+    fill="#D9D9D9",
+    outline="")
+
+button_image_1 = PhotoImage(
+    file=relative_to_assets("button_1.png"))
+button_1 = Button(
+    image=button_image_1,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("button_1 clicked"),
+    relief="flat"
+)
+button_1.place(
+    x=776.0,
+    y=693.0,
+    width=300.0,
+    height=74.0
+)
+window.resizable(False, False)
+window.mainloop()
