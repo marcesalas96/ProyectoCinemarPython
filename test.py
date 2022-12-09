@@ -1,0 +1,1 @@
+f"INSERT INTO pelicula (titulo, duracion, idioma, edad, descripcion, genero, tipo, nroSala) VALUES ('{self.__titulo}',{self.__duracion},'{self.__idioma}',{self.__edad},'{self.__descripcion}','{self.__genero}','{self.__tipo}',{self.__nroSala})"
