@@ -3,103 +3,110 @@
 # https://github.com/ParthJadhav/Tkinter-Designer
 
 
+from msilib.schema import SelfReg
+import sys
+sys.path.append(r"C:\Users\marce\OneDrive\Escritorio\CursoPhyton\MilProgramadores\Cinemar")
+
 from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Toplevel #toplevel era solo para la vtana ppal?
 
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\marce\OneDrive\Escritorio\CursoPhyton\MilProgramadores\Cinemar\build\assets\frame2")
 
 
-def relative_to_assets(path: str) -> Path:
-    return ASSETS_PATH / Path(path)
+class Reserva():
+    
+    def __init__(self, master):
+        super().__init__(master)
+        self.__master = master
+        self.crearWidget()
 
+    def relative_to_assets(self, path: str) -> Path:
+        return ASSETS_PATH / Path(path)    
 
-window = Tk()
+    def crearWidget(self):
+        self.__master.geometry("1280x832")
+        self.__master.configure(bg="#FFFFFF")
+        self.__master.resizable(False, False)
 
-window.geometry("1280x832")
-window.configure(bg = "#FFFFFF")
+    canvas = Canvas(
+        self.__master,
+        bg = "#FFFFFF",
+        height = 832,
+        width = 1280,
+        bd = 0,
+        highlightthickness = 0,
+        relief = "ridge"
+    )
 
+    canvas.place(x = 0, y = 0)
+    canvas.create_rectangle(
+        0.0,
+        0.0,
+        571.0,
+        832.0,
+        fill="#1B2D50",
+        outline="")
 
-canvas = Canvas(
-    window,
-    bg = "#FFFFFF",
-    height = 832,
-    width = 1280,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
+    canvas.create_text(
+        81.0,
+        238.0,
+        anchor="nw",
+        text="VIVÍ LA EXPERIENCIA",
+        fill="#FFFFFF",
+        font=("Inter", 30 * -1)
+    )
 
-canvas.place(x = 0, y = 0)
-canvas.create_rectangle(
-    0.0,
-    0.0,
-    571.0,
-    832.0,
-    fill="#1B2D50",
-    outline="")
+    canvas.create_text(
+        81.0,
+        372.0,
+        anchor="nw",
+        text="CINEMAR",
+        fill="#FFFFFF",
+        font=("AllertaStencil Regular", 95 * -1)
+    )
 
-canvas.create_text(
-    81.0,
-    238.0,
-    anchor="nw",
-    text="VIVÍ LA EXPERIENCIA",
-    fill="#FFFFFF",
-    font=("Inter", 30 * -1)
-)
+    canvas.create_text(
+        640.0,
+        105.0,
+        anchor="nw",
+        text="¿QUÉ TE GUSTARÍA HACER HOY?",
+        fill="#000000",
+        font=("Inter", 27 * -1)
+    )
 
-canvas.create_text(
-    81.0,
-    372.0,
-    anchor="nw",
-    text="CINEMAR",
-    fill="#FFFFFF",
-    font=("AllertaStencil Regular", 95 * -1)
-)
+    button_image_1 = PhotoImage(file=self.relative_to_assets("button_1.png"))
+    button_1 = Button(
+        image=button_image_1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_1 clicked"),
+        relief="flat"
+    )
+    button_1.place(
+        x=730.0,
+        y=256.0,
+        width=379.0,
+        height=74.0
+    )
 
-canvas.create_text(
-    640.0,
-    105.0,
-    anchor="nw",
-    text="¿QUÉ TE GUSTARÍA HACER HOY?",
-    fill="#000000",
-    font=("Inter", 27 * -1)
-)
+    button_image_2 = PhotoImage(file=self.relative_to_assets("button_2.png"))
+    button_2 = Button(
+        image=button_image_2,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_2 clicked"),
+        relief="flat"
+    )
+    button_2.place(
+        x=727.0,
+        y=416.0,
+        width=379.0,
+        height=74.0
+    )
 
-button_image_1 = PhotoImage(
-    file=relative_to_assets("button_1.png"))
-button_1 = Button(
-    image=button_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="flat"
-)
-button_1.place(
-    x=730.0,
-    y=256.0,
-    width=379.0,
-    height=74.0
-)
-
-button_image_2 = PhotoImage(
-    file=relative_to_assets("button_2.png"))
-button_2 = Button(
-    image=button_image_2,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
-    relief="flat"
-)
-button_2.place(
-    x=727.0,
-    y=416.0,
-    width=379.0,
-    height=74.0
-)
-window.resizable(False, False)
-window.mainloop()
+    #self.mainloop()
