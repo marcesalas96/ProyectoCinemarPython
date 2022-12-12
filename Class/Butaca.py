@@ -22,3 +22,5 @@ class Butaca:
         bd = sqlite3.connect("cinemar.sqlite3")
         conexion = bd.cursor()
         conexion.execute(f"INSERT INTO butaca (pos, ocupado, id_funcion) VALUES ({self.__posiscion}, {self.__ocupado}, {self.__idFuncion}")
+        bd.commit()
+        bd.close()
