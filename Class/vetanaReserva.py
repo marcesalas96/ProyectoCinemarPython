@@ -16,7 +16,7 @@ ASSETS_PATH = OUTPUT_PATH / Path(
 )
 
 
-class Registro():
+class Reserva():
     
     def __init__(self, master):
         super().__init__(master)
@@ -27,7 +27,6 @@ class Registro():
         return ASSETS_PATH / Path(path)
 
     def crearWidget(self):
-
         self.__master.geometry("1280x832")
         self.__master.configure(bg="#FFFFFF")
         self.__master.resizable(False, False)
