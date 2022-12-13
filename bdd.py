@@ -31,16 +31,21 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS pelicula(
 
 cursor.execute("""CREATE TABLE IF NOT EXISTS funcion (
                 id_funcion integer PRIMARY KEY,
-                horario time,
-                fecha date,
+                horario text,
+                fecha text,
                 id_sala integer,
                 FOREIGN KEY(id_sala) REFERENCES sala(id_sala))""")
 
 cursor.execute("""CREATE TABLE IF NOT EXISTS butaca(
-                pos integer primary key,
+                pos integer,
                 ocupado boolean,
                 id_funcion integer,
                 FOREIGN KEY(id_funcion) REFERENCES funcion(id_funcion))
                 """)
+cursor.execute("""CREATE TABLE IF NOT EXISTS reserva(
+                datos_reserva text,
+                id_usuario integer,
+                FOREIGN KEY(id_usuario) REFERENCES usuario(id_usuario)
+                )""")
 conexion.commit()
 conexion.close()

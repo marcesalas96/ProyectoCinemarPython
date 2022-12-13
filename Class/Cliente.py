@@ -18,6 +18,9 @@ class Cliente:
     cadena+= "\nEdad: "+str(self.__edad)
     return cadena
 
+  def setAdmin(self):
+    self.__admin = True
+
   @property 
   def get_nombre(self):
     return self.__nombre

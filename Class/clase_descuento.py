@@ -36,18 +36,17 @@ class Descuento:
     self.valorEntrada()
     dia=self.dia()
     print(dia)
-    if (dia == "Lunes" ):
+    if (dia == "0" or dia == "2" ):
       print("entre")
       self.__porcentajeDescuento = self.__valorEntrada * 0.20
       self.__valorEntrada-=self.__porcentajeDescuento
       print(f"El valor de la entrada es: {self.__valorEntrada} ")
-    elif (self.__dia == "Martes" | "Jueves"):
+    elif (dia == "1" or dia == "3"):
+      print("entre martes")
       self.__porcentajeDescuento = self.__valorEntrada * 0.15
       self.__valorEntrada-=self.__porcentajeDescuento
       print(f"El valor de la entrada es: {self.__valorEntrada} ")
-    elif (self.__dia == "Viernes" | "Sabado" | "Domingo"):
+    elif (dia == "4" or dia == "5" | dia == "6"):
      self.__porcentajeDescuento = self.__valorEntrada * 0.10
      self.__valorEntrada-=self.__porcentajeDescuento
      print(f"El valor de la entrada es: {self.__valorEntrada} ")
-descuento=Descuento("2D", True, "Viernes")
-descuento.porcentajeDescuento()

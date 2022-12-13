@@ -1,7 +1,7 @@
 import sys
 sys.path.append(r"C:\Users\marce\OneDrive\Escritorio\CursoPhyton\MilProgramadores\Cinemar")
 
-from Class.vetanaReserva import Registro
+from Class.ventanaRegistro import Registro
 from pathlib import Path
 from tkinter import *
 from Class.Usuario import Usuario
@@ -10,11 +10,10 @@ OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\marce\OneDrive\Escritorio\CursoPhyton\MilProgramadores\Cinemar\build\assets\frame0")
 
 class LogIn():
-    
-    def __init__(self, master):
-       super().__init__(master)
-       self.__master = master
-       self.crearWidget()       
+    def __init__(self):
+    #    super().__init__(master)
+       self.__master = Tk()
+       self.crearVentanaLog()       
 
     def abrirVentana():
         registro = Registro(Tk()) #está bien este TK()?
@@ -27,8 +26,7 @@ class LogIn():
     def relative_to_assets(self, path: str) -> Path:
         return ASSETS_PATH / Path(path)
 
-    def crearVentanaLog(self):    
-        self.master.ventana = Tk()
+    def crearVentanaLog(self):
         self.__master.geometry("1280x832")
         self.__master.configure(bg = "#FFFFFF")
         self.__master.resizable(False,False)
@@ -153,7 +151,7 @@ class LogIn():
             image=button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command= lambda : loginUsuario(entry_1.get(), entry_2.get()),
+            command= lambda : self.loginUsuario(entry_1.get(), entry_2.get()),
             relief="flat"
         )
         button_2.place(
@@ -167,7 +165,7 @@ class LogIn():
             image=button_image_3,
             borderwidth=0,
             highlightthickness=0,
-            command= lambda : ,
+            command= lambda : self.abrirVentana(),
             relief="flat"
         )
         button_3.place(

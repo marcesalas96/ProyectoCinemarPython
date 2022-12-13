@@ -1,4 +1,6 @@
 import sqlite3
+from Class.Admin import Admin
+from Class.Reserva import Reserva
 class Usuario:
 
   def __init__(self, nombre_usuario, clave):
@@ -27,16 +29,41 @@ class Usuario:
     self.__tieneTarjeta = True
     #UPADTE A LA BDD, PARA CAMBIAR EL ESTADO DEL CLIENTE QUE TIENE TARJETA
     
+  def mostrarPeliculas(self):
+    db = sqlite3.connect("cinemar.sqlite3")
+    conexion = db.cursor()
+    data = conexion.execute("SELECT funcion.id_funcion, funcion.horario, funcion.fecha, pelicula.titulo, pelicula.duracion, pelicula.tipo FROM sala INNER JOIN pelicula ON pelicula.id_sala = sala.id_sala INNER JOIN funcion ON funcion.id_sala = sala.id_sala ")
+    tupla = data.fetchall()
+    print(f"{self.__nombre_usuario}, estas son las peliculas que tenemos para ofrecerte!\n")
+    for peli in tupla:
+      print(peli)
+    seleccion = input("Selecciona la peli que queres ver: ")
+    self.crearReserva(seleccion, tupla)
+    
   def login(self):
     db = sqlite3.connect("cinemar.sqlite3")
     conexion = db.cursor()
-    # nombreUsuario = input("Ingresa tu nombre de usuario: ")
-    # contraseña = input("Ingresa tu contraseña: ")
     data = conexion.execute(f"SELECT nombre_usuario, contraseña, admin from usuario WHERE nombre_usuario = '{self.__nombre_usuario}' ")
     if(data):
       tuplaComparar = data.fetchone()
+      print(tuplaComparar)
       if (tuplaComparar[1] == self.__clave):
-        print("Acceso correcto")
-    db.close()
-  
+        if(tuplaComparar[2] == "True"):
+          db.close() 
+          admin = Admin()
+          admin.crearSala(1 ,20)
+          admin.crearPelicula(1,"accion", "pelicula de un ogro 2 ", 12, 120, "Shrek2", "es", "3D", 1)
+          admin.crearFuncion(1,"22:00:00", "2022/12/12",1)
+        else:
+          self.mostrarPeliculas()
+        #abriria ventana de panel de usuario 
+    
+  def crearReserva(self, seleccion, tupla):
+    db = sqlite3.connect("cinemar.sqlite3")
+    conexion = db.cursor()
+    data = conexion.execute(f"SELECT id_usuario from usuario WHERE nombre_usuario = '{self.__nombre_usuario}'")
+    idUsuario = data.fetchone()
+    print(idUsuario)
+    reserva = Reserva(tupla[int(seleccion) - 1 ], idUsuario[0])
+    reserva.crearReserva()
 

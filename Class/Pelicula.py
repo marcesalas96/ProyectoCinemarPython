@@ -27,6 +27,3 @@ class Pelicula :
         bd.commit()
         bd.close()
         
-        
-peli1 = Pelicula(2,"Infantil","Es una pelicula de un ogro",12,96,"Shreck","es","2d",2)
-peli1.guardarPeliculaBDD()
