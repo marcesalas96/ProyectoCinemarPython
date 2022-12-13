@@ -43,7 +43,16 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS butaca(
                 FOREIGN KEY(id_funcion) REFERENCES funcion(id_funcion))
                 """)
 cursor.execute("""CREATE TABLE IF NOT EXISTS reserva(
-                datos_reserva text,
+                id_reserva integer primary key autoincrement,
+                id_funcion integer,
+                horario text,
+                fecha text,
+                titulo text,
+                duracion text,
+                tipo text,
+                valorEntrada text,
+                fechaDeCreacion text,
+                horaDeCreacion text,
                 id_usuario integer,
                 FOREIGN KEY(id_usuario) REFERENCES usuario(id_usuario)
                 )""")

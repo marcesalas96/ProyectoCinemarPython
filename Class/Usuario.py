@@ -28,16 +28,25 @@ class Usuario:
     #ACCEDER A LA BDD, PEDIR TODAS LAS ULTIMAS 6 RESERVAS DEL USUARIO, VER LA ULTIMA FECHA Y QUE SEA MAYOR A 3 MESES
     self.__tieneTarjeta = True
     #UPADTE A LA BDD, PARA CAMBIAR EL ESTADO DEL CLIENTE QUE TIENE TARJETA
-    
+  def mostrarMenu(self):
+    print(f"BIENVENIDO A CINEMAR, {self.__nombre_usuario}")
+    print("""
+          1. Ver Peliculas
+          2. Mostrar Reservas""")
+    seleccion = int(input("Ingresa la opcion: "))
+    if(seleccion== 1):
+      self.mostrarPeliculas()
+    elif(seleccion == 2):
+      self.mostrarReservas()
   def mostrarPeliculas(self):
     db = sqlite3.connect("cinemar.sqlite3")
     conexion = db.cursor()
     data = conexion.execute("SELECT funcion.id_funcion, funcion.horario, funcion.fecha, pelicula.titulo, pelicula.duracion, pelicula.tipo FROM sala INNER JOIN pelicula ON pelicula.id_sala = sala.id_sala INNER JOIN funcion ON funcion.id_sala = sala.id_sala ")
     tupla = data.fetchall()
-    print(f"{self.__nombre_usuario}, estas son las peliculas que tenemos para ofrecerte!\n")
+    print(f"\n{self.__nombre_usuario}, estas son las peliculas que tenemos para ofrecerte!\n")
     for peli in tupla:
       print(peli)
-    seleccion = input("Selecciona la peli que queres ver: ")
+    seleccion = input("\nSelecciona la peli que queres ver: ")
     self.crearReserva(seleccion, tupla)
     
   def login(self):
@@ -46,16 +55,13 @@ class Usuario:
     data = conexion.execute(f"SELECT nombre_usuario, contraseña, admin from usuario WHERE nombre_usuario = '{self.__nombre_usuario}' ")
     if(data):
       tuplaComparar = data.fetchone()
-      print(tuplaComparar)
       if (tuplaComparar[1] == self.__clave):
         if(tuplaComparar[2] == "True"):
           db.close() 
-          admin = Admin()
-          admin.crearSala(1 ,20)
-          admin.crearPelicula(1,"accion", "pelicula de un ogro 2 ", 12, 120, "Shrek2", "es", "3D", 1)
-          admin.crearFuncion(1,"22:00:00", "2022/12/12",1)
+          admin = Admin(self.__nombre_usuario)
+          admin.mostrarMenu()
         else:
-          self.mostrarPeliculas()
+          self.mostrarMenu()
         #abriria ventana de panel de usuario 
     
   def crearReserva(self, seleccion, tupla):
@@ -63,7 +69,21 @@ class Usuario:
     conexion = db.cursor()
     data = conexion.execute(f"SELECT id_usuario from usuario WHERE nombre_usuario = '{self.__nombre_usuario}'")
     idUsuario = data.fetchone()
-    print(idUsuario)
     reserva = Reserva(tupla[int(seleccion) - 1 ], idUsuario[0])
     reserva.crearReserva()
+    
+  def mostrarReservas(self):
+    db = sqlite3.connect("cinemar.sqlite3")
+    conexion = db.cursor()
+    data = conexion.execute(f"SELECT id_usuario from usuario WHERE nombre_usuario = '{self.__nombre_usuario}'")
+    idUsuario = data.fetchone()
+    dataReservas = conexion.execute(f"SELECT * from reserva WHERE id_usuario = {idUsuario[0]}")
+    reservas = dataReservas.fetchall()
+    for reserva in reservas:
+      print(reserva)
+      print("\n")
+    db.commit()
+    db.close()
+    
+
 

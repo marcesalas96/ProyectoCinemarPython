@@ -11,7 +11,6 @@ class Descuento:
   def __init__(self, tipoDePelicula, tieneTarjeta, dia):
     self.__tipo= tipoDePelicula
     self.__tarjeta= tieneTarjeta
-    self.__precioEntrada= 0
     self.__dia= dia
     self.__porcentajeDescuento= 0
   
@@ -35,18 +34,20 @@ class Descuento:
   def porcentajeDescuento(self):
     self.valorEntrada()
     dia=self.dia()
-    print(dia)
-    if (dia == "0" or dia == "2" ):
-      print("entre")
-      self.__porcentajeDescuento = self.__valorEntrada * 0.20
-      self.__valorEntrada-=self.__porcentajeDescuento
-      print(f"El valor de la entrada es: {self.__valorEntrada} ")
-    elif (dia == "1" or dia == "3"):
-      print("entre martes")
-      self.__porcentajeDescuento = self.__valorEntrada * 0.15
-      self.__valorEntrada-=self.__porcentajeDescuento
-      print(f"El valor de la entrada es: {self.__valorEntrada} ")
-    elif (dia == "4" or dia == "5" | dia == "6"):
-     self.__porcentajeDescuento = self.__valorEntrada * 0.10
-     self.__valorEntrada-=self.__porcentajeDescuento
-     print(f"El valor de la entrada es: {self.__valorEntrada} ")
+    if(self.__tarjeta == "True"):  
+      if (dia == "0" or dia == "2" ):
+        print("entre")
+        self.__porcentajeDescuento = self.__valorEntrada * 0.20
+        self.__valorEntrada-=self.__porcentajeDescuento
+        return self.__valorEntrada
+      elif (dia == "1" or dia == "3"):
+        print("entre martes")
+        self.__porcentajeDescuento = self.__valorEntrada * 0.15
+        self.__valorEntrada-=self.__porcentajeDescuento
+        return self.__valorEntrada
+      elif (dia == "4" or dia == "5" or dia == "6"):
+        self.__porcentajeDescuento = self.__valorEntrada * 0.10
+        self.__valorEntrada-=self.__porcentajeDescuento
+        return self.__valorEntrada
+    else:
+      return self.__valorEntrada

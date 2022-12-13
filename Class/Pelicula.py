@@ -26,4 +26,10 @@ class Pelicula :
         conexion.execute(f"INSERT INTO pelicula (titulo, duracion, idioma, edad, descripcion, genero, tipo, id_sala) VALUES ('{self.__titulo}',{self.__duracion},'{self.__idioma}',{self.__edad},'{self.__descripcion}','{self.__genero}','{self.__tipo}',{self.__nroSala})")
         bd.commit()
         bd.close()
+    def actualizarPeli(self):
+        bd = sqlite3.connect("cinemar.sqlite3")
+        conexion = bd.cursor()
+        conexion.execute(f"UPDATE pelicula  SET titulo='{self.__titulo}', duracion = {self.__duracion}, idioma = '{self.__idioma}', edad = {self.__edad}, descripcion = '{self.__descripcion}', genero = '{self.__genero}', tipo = '{self.__tipo}' WHERE id_pelicula = {self.__id} ")
+        bd.commit()
+        bd.close()
         
