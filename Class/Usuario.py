@@ -58,10 +58,9 @@ class Usuario:
       if (tuplaComparar[1] == self.__clave):
         if(tuplaComparar[2] == "True"):
           db.close() 
-          admin = Admin(self.__nombre_usuario)
-          admin.mostrarMenu()
+          return True
         else:
-          self.mostrarMenu()
+          return False
         #abriria ventana de panel de usuario 
     
   def crearReserva(self, seleccion, tupla):
@@ -71,6 +70,7 @@ class Usuario:
     idUsuario = data.fetchone()
     reserva = Reserva(tupla[int(seleccion) - 1 ], idUsuario[0])
     reserva.crearReserva()
+    self.mostrarMenu()
     
   def mostrarReservas(self):
     db = sqlite3.connect("cinemar.sqlite3")
@@ -84,6 +84,7 @@ class Usuario:
       print("\n")
     db.commit()
     db.close()
+    self.mostrarMenu()
     
 
 

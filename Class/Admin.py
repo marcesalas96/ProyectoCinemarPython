@@ -5,8 +5,8 @@ from Class.Funcion import Funcion
 from Class.Butaca import Butaca
 idFuncion = ""
 class Admin:
-    def __init__(self, nombreUsuario):
-        self.__nombreUsuario = nombreUsuario
+    def __init__(self):
+        pass
     def verReservas(self):
         db = sqlite3.connect("cinemar.sqlite3")
         conexion = db.cursor()
@@ -62,58 +62,57 @@ class Admin:
     def actualizarPeli(self,idPelicula,genero,descripcion,edad,duracion,titulo,idioma,tipo,idSala):
         pelicula = Pelicula(idPelicula,genero,descripcion,edad,duracion,titulo,idioma,tipo,idSala)
         pelicula.actualizarPeli()
-    
-    
-    def mostrarMenu(self):
-        print(f"\n Bienvenido, {self.__nombreUsuario}!")
-        print("""***************************
-        1. Crear Sala
-        2. Crear Pelicula
-        3. Crear Funcion
-        4. Modificar Pelicula
-        5. Ver Reservas
-        *******************************""")
-        seleccion = int(input("\n Ingresa la opcion donde quieras ingresar: "))
         
-        if(seleccion == 1):
-            idSala = input("Ingresa el numero de sala: ")
-            cantidadButacas = input("Ingresa el numero de butacas de la sala: ")
-            self.crearSala(idSala, cantidadButacas)
-        elif(seleccion == 2):
-            idPelicula = input("Ingresa el numero de pelicula: ")
-            genero = input("Ingresa el genero de la pelicula: ")
-            descripcion= input("Ingresa la descripcion de la pelicula: ")
-            edad= input("Ingresa la edad necesaria para ver  la pelicula: ")
-            duracion= input("Ingresa la duracion de la pelicula: ")
-            titulo= input("Ingresa el titulo de la pelicula: ")
-            idioma= input("Ingresa el idioma de la pelicula: ")
-            tipo= input("Ingresa el tipo de la pelicula: ")
-            numeroDeSala= input("Ingresa el numero de sala donde se va a proyectar la pelicula: ")
-            self.crearPelicula(idPelicula, genero, descripcion, edad, duracion, titulo, idioma, tipo, numeroDeSala )
-        elif (seleccion == 3):
-            idFuncion = input("Ingresa el numero de funcion: ")
-            horario= input("Ingresa el horario de la funcion: ")
-            fecha= input("Ingresa la fecha de la pelicula: ")
-            numeroDeSala= input("Ingresa el numero de sala donde se va a proyectar la pelicula: ")
-            self.crearFuncion(idFuncion, horario, fecha, numeroDeSala)
-        elif(seleccion == 4):
-            idPelicula = input("Ingresa el numero de pelicula: ")
-            genero = input("Ingresa el genero de la pelicula: ")
-            descripcion= input("Ingresa la descripcion de la pelicula: ")
-            edad= input("Ingresa la edad necesaria para ver  la pelicula: ")
-            duracion= input("Ingresa la duracion de la pelicula: ")
-            titulo= input("Ingresa el titulo de la pelicula: ")
-            idioma= input("Ingresa el idioma de la pelicula: ")
-            tipo= input("Ingresa el tipo de la pelicula: ")
-            numeroDeSala= input("Ingresa el numero de sala donde se va a proyectar la pelicula: ")
-            self.actualizarPeli(idPelicula, genero, descripcion, edad, duracion, titulo,idioma, tipo, numeroDeSala)
-        elif(seleccion== 5):
-             db = sqlite3.connect("cinemar.sqlite3")
-             conexion = db.cursor()
-             data = conexion.execute("SELECT * from reserva")
-             reservas = data.fetchall()
-             print("************Reservas************")
-             for i in reservas:
-                 print(i)
-                 print("\n")
-    
+        
+        # def mostrarMenu(self):
+        #     print("""***************************
+        #     1. Crear Sala
+        #     2. Crear Pelicula
+        #     3. Crear Funcion
+        #     4. Modificar Pelicula
+        #     5. Ver Reservas
+        #     *******************************""")
+        #     seleccion = int(input("\n Ingresa la opcion donde quieras ingresar: "))
+            
+        #     if(seleccion == 1):
+        #         idSala = input("Ingresa el numero de sala: ")
+        #         cantidadButacas = input("Ingresa el numero de butacas de la sala: ")
+        #         self.crearSala(idSala, cantidadButacas)
+        #     elif(seleccion == 2):
+        #         idPelicula = input("Ingresa el numero de pelicula: ")
+        #         genero = input("Ingresa el genero de la pelicula: ")
+        #         descripcion= input("Ingresa la descripcion de la pelicula: ")
+        #         edad= input("Ingresa la edad necesaria para ver  la pelicula: ")
+        #         duracion= input("Ingresa la duracion de la pelicula: ")
+        #         titulo= input("Ingresa el titulo de la pelicula: ")
+        #         idioma= input("Ingresa el idioma de la pelicula: ")
+        #         tipo= input("Ingresa el tipo de la pelicula: ")
+        #         numeroDeSala= input("Ingresa el numero de sala donde se va a proyectar la pelicula: ")
+        #         self.crearPelicula(idPelicula, genero, descripcion, edad, duracion, titulo, idioma, tipo, numeroDeSala )
+        #     elif (seleccion == 3):
+        #         idFuncion = input("Ingresa el numero de funcion: ")
+        #         horario= input("Ingresa el horario de la funcion: ")
+        #         fecha= input("Ingresa la fecha de la pelicula: ")
+        #         numeroDeSala= input("Ingresa el numero de sala donde se va a proyectar la pelicula: ")
+        #         self.crearFuncion(idFuncion, horario, fecha, numeroDeSala)
+        #     elif(seleccion == 4):
+        #         idPelicula = input("Ingresa el numero de pelicula: ")
+        #         genero = input("Ingresa el genero de la pelicula: ")
+        #         descripcion= input("Ingresa la descripcion de la pelicula: ")
+        #         edad= input("Ingresa la edad necesaria para ver  la pelicula: ")
+        #         duracion= input("Ingresa la duracion de la pelicula: ")
+        #         titulo= input("Ingresa el titulo de la pelicula: ")
+        #         idioma= input("Ingresa el idioma de la pelicula: ")
+        #         tipo= input("Ingresa el tipo de la pelicula: ")
+        #         numeroDeSala= input("Ingresa el numero de sala donde se va a proyectar la pelicula: ")
+        #         self.actualizarPeli(idPelicula, genero, descripcion, edad, duracion, titulo,idioma, tipo, numeroDeSala)
+        #     elif(seleccion== 5):
+        #         db = sqlite3.connect("cinemar.sqlite3")
+        #         conexion = db.cursor()
+        #         data = conexion.execute("SELECT * from reserva")
+        #         reservas = data.fetchall()
+        #         print("************Reservas************")
+        #         for i in reservas:
+        #             print(i)
+                    # print("\n")
+        
