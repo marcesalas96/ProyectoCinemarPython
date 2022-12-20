@@ -223,6 +223,65 @@ class App(customtkinter.CTk):
             self.sala.grid(row=5, column=1,pady=20)
             self.botonGuardarPeli = customtkinter.CTkButton(windowCrearPeli, command=self.crearPeli, text="Guardar")
             self.botonGuardarPeli.grid(row=6, column=2,pady=20)
+        elif("3" in choice):
+            windowCrearFuncion = customtkinter.CTkToplevel(self)
+            windowCrearFuncion.grid_columnconfigure((1, 2), weight=1)
+            windowCrearFuncion.grid_rowconfigure((1,3), weight=0)
+            self.idFuncion = customtkinter.CTkEntry(windowCrearFuncion,placeholder_text="Ingresa el numero de Funcion", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.idFuncion.grid(row=1, column=1, pady=20)
+            self.horario = customtkinter.CTkEntry(windowCrearFuncion,placeholder_text="Ingresa el horario de la funcion", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.horario.grid(row=1, column=2,pady=20)
+            self.fecha = customtkinter.CTkEntry(windowCrearFuncion,placeholder_text="Ingresa la fecha de la funcion", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.fecha.grid(row=2, column=1,pady=20)
+            self.nroSala = customtkinter.CTkEntry(windowCrearFuncion,placeholder_text="Ingresa la sala de  la funcion", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.nroSala.grid(row=2, column=2,pady=20)
+            self.botonGuardarFuncion = customtkinter.CTkButton(windowCrearFuncion, command=self.crearFuncion, text="Guardar")
+            self.botonGuardarFuncion.grid(row=3, column=2,pady=20)
+        elif("4" in choice):
+            windowCrearPeli = customtkinter.CTkToplevel(self)
+            windowCrearPeli.grid_columnconfigure((1, 2), weight=1)
+            windowCrearPeli.grid_rowconfigure((1,6), weight=0)
+
+            self.idPelicula = customtkinter.CTkEntry(windowCrearPeli,placeholder_text="Ingresa el numero de Pelicula", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.idPelicula.grid(row=1, column=1, pady=20)
+            self.genero = customtkinter.CTkEntry(windowCrearPeli,placeholder_text="Ingresa tel genero de la pelicula", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.genero.grid(row=1, column=2,pady=20)
+            self.descripcion = customtkinter.CTkEntry(windowCrearPeli,placeholder_text="Ingresa la descripcion de la pelicula", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.descripcion.grid(row=2, column=1,pady=20)
+            self.edadPeli = customtkinter.CTkEntry(windowCrearPeli,placeholder_text="Ingresa la edad para ver la pelicula", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.edadPeli.grid(row=2, column=2,pady=20)
+            self.duracion = customtkinter.CTkEntry(windowCrearPeli,placeholder_text="Ingresa la duracion de la pelicula", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.duracion.grid(row=3, column=1,pady=20)
+            self.titulo = customtkinter.CTkEntry(windowCrearPeli,placeholder_text="Ingresa el titulo de la pelicula", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.titulo.grid(row=3, column= 2,pady=20)
+            self.tipo = customtkinter.CTkEntry(windowCrearPeli, placeholder_text="Ingresa el tipo de la pelicula", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.tipo.grid(row=4, column=1,pady=20)
+            self.idioma = customtkinter.CTkEntry(windowCrearPeli, placeholder_text="Ingresa el idioma de la pelicula", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.idioma.grid(row=4, column=2,pady=20)
+            self.sala = customtkinter.CTkEntry(windowCrearPeli, placeholder_text="Ingresa la sala de la pelicula", placeholder_text_color="white", width=300, height=25, border_width=2, corner_radius=10)
+            self.sala.grid(row=5, column=1,pady=20)
+            self.botonGuardarPeli = customtkinter.CTkButton(windowCrearPeli, command=self.actualizarPeli, text="Actualizar")
+            self.botonGuardarPeli.grid(row=6, column=2,pady=20)
+        else:
+            windowVerReservas = customtkinter.CTkToplevel(self)
+            windowVerReservas.geometry("800x900")
+            windowVerReservas.grid_columnconfigure(1, weight=0)
+            windowVerReservas.grid_rowconfigure((1, 100), weight=0)
+            admin = Admin()
+            reservas = admin.verReservas()
+            contador = 2
+            tituloReserva = customtkinter.CTkLabel(windowVerReservas, width=500, text="RESERVAS DE CLIENTES")
+            tituloReserva.grid(row=1)
+            
+            for reserva in reservas:
+                reservaLabel = customtkinter.CTkLabel(windowVerReservas, width=300, height=25, text=f"N°:{reserva[1]}, Hora: {reserva[2]}, Fecha: {reserva[3]}, Pelicula: {reserva[4]}, Fecha y Hora de reserva: {reserva[8]} - {reserva[9]}, Precio: ${reserva[7]}")
+                reservaLabel.grid(row=contador, pady=10,padx=20)
+                contador+=1
+            
+            
+            
+            
+            
             
     def crearSala(self):
         admin = Admin()
@@ -241,5 +300,24 @@ class App(customtkinter.CTk):
         tipo = self.tipo.get()
         idSala = int(self.sala.get())
         admin.crearPelicula(idPelicula,genero,descripcion,edad,duracion,titulo,idioma,tipo,idSala)
+    def crearFuncion(self):
+        admin = Admin()
+        idFuncion = int(self.idFuncion.get())
+        horario = self.horario.get()
+        fecha = self.fecha.get()
+        idSala = int(self.nroSala.get())
+        admin.crearFuncion(idFuncion, horario, fecha, idSala)
+    def actualizarPeli(self):
+        admin = Admin()
+        idPelicula = int(self.idPelicula.get())
+        genero = self.genero.get()
+        descripcion = self.descripcion.get() 
+        edad = int(self.edadPeli.get())
+        duracion = int(self.duracion.get())
+        titulo = self.titulo.get()
+        idioma = self.idioma.get()
+        tipo = self.tipo.get()
+        idSala = int(self.sala.get())
+        admin.actualizarPeli(idPelicula,genero,descripcion,edad,duracion,titulo,idioma,tipo,idSala)
 
 

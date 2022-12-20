@@ -10,19 +10,20 @@ class Admin:
     def verReservas(self):
         db = sqlite3.connect("cinemar.sqlite3")
         conexion = db.cursor()
-        data = conexion.execute(f"SELECT * FROM reservas")
+        data = conexion.execute(f"SELECT * FROM reserva")
         if(data):
             reservas = data.fetchall()
-            #mostrar reservas en interfaz grafica
-        db.commit()
-        db.close()
+            db.commit()
+            db.close()
+        return reservas
+    
     def verReservaParticular(self, usuarioCliente):
         db = sqlite3.connect("cinemar.sqlite3")
         conexion = db.cursor()
         dataCliente = conexion.execute(f"SELECT id_usuario FROM usuario where nombre_usuario = {usuarioCliente}")
         if(dataCliente):
             Cliente = dataCliente.fetchone()
-            dataReserva = conexion.execute(f"SELECT * FROM reservas where id_cliente = {Cliente[0]}")
+            dataReserva = conexion.execute(f"SELECT * FROM reserva where id_cliente = {Cliente[0]}")
             if(dataReserva):
                 reserva = dataReserva.fetchall()
                 #mostrar reservas en interfaz grafica
